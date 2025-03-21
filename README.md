@@ -16,6 +16,9 @@ The original plan was to generate code for a target platform (MIPS), but the fin
     
 Because it’s Java-based, you’ll need a Java Development Kit (JDK) installed. You can modify or extend the ANTLR grammars (.g4 files) to update the parsing logic.
 
+# AST 🌳
+An Abstract Syntax Tree (AST) is a structured, tree-like representation of a program’s source code after it has been tokenized and parsed. When the Cool source file is parsed via the ANTLR-generated parser, it first produces a parse tree corresponding to the grammar’s tokens and rules. In Java, a custom visitor then traverses this parse tree, creating dedicated AST node objects (e.g., ProgramNode, ClassNode, MethodNode, ExpressionNode) that represent the high-level structure of the Cool program. These nodes store relevant data (like identifiers, literal values, and operator types), forming a hierarchy that precisely mirrors the program’s logical constructs. By separating the final AST from the raw parse tree, the subsequent semantic checks and interpretation phases can work with a more streamlined, language-specific representation, rather than dealing with the lower-level parse details.
+
 # How does the semantic evaluation work ❔
 This process starts from the representation generated during the syntactic analysis phase, in the form of an abstract syntax tree (AST). The result of this phase is an annotated version of the above-mentioned intermediate representation, which includes information about the symbols and types present in the program.
 The current project will receive, as command-line parameters, the names of one or more files containing Cool programs and will print to standard error any semantic errors that occur, or nothing if the program is semantically correct. The test programs will be lexically and syntactically correct!  
